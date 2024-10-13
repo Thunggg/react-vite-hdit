@@ -61,3 +61,7 @@
     display: flex;
     justify-content: space-between;
 }
+
+.todo-image{
+  text-align: center;
+}
