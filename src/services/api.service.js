@@ -11,8 +11,14 @@ const createUserAPI = (fullName, email, password, phone) => {
     return axios.post(URL_BACKEND, data);
 }
 
-const updateUserAPI = () => {
-
+const updateUserAPI = (_id, fullName, phone) => {
+    const URL_BACKEND = "/api/v1/user";
+    const data = {
+        _id: _id,
+        fullName: fullName,
+        phone: phone
+    }; 
+    return axios.put(URL_BACKEND, data);
 }
 
 const fetchAllUserAPI = () => {
