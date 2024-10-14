@@ -2,6 +2,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Table } from 'antd';
 import UpdateUserModal from './update.user.modal';
 import { useState } from 'react';
+import ViewUserDetail from './view.user.detail';
 
 
 const UserTable = (props) => {
@@ -10,13 +11,22 @@ const UserTable = (props) => {
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);  
     const [dataUpdate, setDataUpdate] = useState(null);
 
+    const [isUserTableOpen, setIsUserTableOpen] = useState(false); // cua view.user.detail
+    const [dataUserTableOpen, setDataUserTableOpen] = useState(null);
+
     const columns = [
         {
             title: 'Id',
             dataIndex: '_id',
             render: (_, record) => {
                 return(
-                    <a href='#'>{record._id}</a>
+                    <a 
+                    href='#'
+                    onClick={() => {
+                        setIsUserTableOpen(true);
+                        setDataUserTableOpen(record);
+                    }}
+                    >{record._id}</a>
                 )
             }
         },
@@ -39,6 +49,7 @@ const UserTable = (props) => {
                     onClick={() => {
                         setIsModalUpdateOpen(true);
                         setDataUpdate(record);
+                        setDataUserTableOpen(record);
                     }}
                     />
                     <DeleteOutlined style={{cursor:"pointer", color: "red"}}/>
@@ -88,6 +99,12 @@ const UserTable = (props) => {
                 dataUpdate={dataUpdate}
                 setDataUpdate={setDataUpdate}
                 loadUser={loadUser}
+            />
+            <ViewUserDetail
+            isUserTableOpen={isUserTableOpen}
+            setIsUserTableOpen={setIsUserTableOpen}
+            dataUserTableOpen={dataUserTableOpen}
+            setDataUserTableOpen={setDataUserTableOpen}
             />
         </>
         
