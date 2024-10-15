@@ -133,6 +133,7 @@ const UserTable = (props) => {
             setIsUserTableOpen={setIsUserTableOpen}
             dataUserTableOpen={dataUserTableOpen}
             setDataUserTableOpen={setDataUserTableOpen}
+            loadUser={loadUser}
             />
         </>
         
