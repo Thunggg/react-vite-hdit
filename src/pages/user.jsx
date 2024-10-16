@@ -7,13 +7,13 @@ const UserPage = () => {
 
     const [dataUser, setDataUser] = useState([]);
     const [current, setCurrent] = useState(1);
-    const [pageSize, setPageSize] = useState(5);
+    const [pageSize, setPageSize] = useState(10);
     const [total, setTotal] = useState(0);
 
 
     useEffect(() => {
         loadUser();
-    }, []);
+    }, [current, pageSize]);
 
     const loadUser = async () => {
         const res = await fetchAllUserAPI(current, pageSize);
@@ -26,6 +26,7 @@ const UserPage = () => {
         
     }
 
+    console.log(">>>> check current", pageSize);
     return (
         <>
             <div style={{padding: "20px"}}>

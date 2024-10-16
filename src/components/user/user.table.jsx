@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, notification, Popconfirm, Table } from 'antd';
+import { Button, notification, Pagination, Popconfirm, Table } from 'antd';
 import UpdateUserModal from './update.user.modal';
 import { useState } from 'react';
 import ViewUserDetail from './view.user.detail';
@@ -38,7 +38,7 @@ const UserTable = (props) => {
             render: (_, record, index) => {
                 return(
                     <>
-                        <p>{index + 1}</p>
+                        <p>{(index + 1) + (current - 1) * pageSize}</p>
                     </>
                     
                 )
@@ -100,7 +100,20 @@ const UserTable = (props) => {
     ];
     
     const onChange = (pagination, filters, sorter, extra) => {
-        console.log(pagination, filters, sorter, extra);
+        console.log(pagination);
+        // nếu thay đổi trang
+        if(pagination && pagination.current){
+            if(+pagination.current !== +current){
+                setCurrent(+pagination.current);
+            }
+        }
+
+        // nếu thay đổi tổng số phần tử
+        if(pagination && pagination.pageSize){
+            if(+pagination.pageSize !== +pageSize){
+                setPageSize(+pagination.pageSize);
+            }
+        }
     }
 
     
