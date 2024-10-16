@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
-import { AppstoreOutlined, BookOutlined, MailOutlined, SettingOutlined, UsergroupDeleteOutlined } from '@ant-design/icons';
+import {  BookOutlined, LoginOutlined, MailOutlined, SettingOutlined, UsergroupDeleteOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
-import { useState } from 'react';
+import { Children, useState } from 'react';
 
 const Header = () => {
     const [current, setCurrent] = useState('mail');
@@ -25,6 +25,21 @@ const Header = () => {
           label: <Link to={"/books"}>Books</Link>,
           key: 'books',
           icon: <BookOutlined />
+        },
+        {
+          label: "Cài đặt",
+          key: 'setting',
+          icon: <SettingOutlined />,
+          children:[
+            {
+              label: <Link to={"/login"}>đăng nhập</Link>,
+              key: 'login'
+            },
+            {
+              label: 'Đăng xuất',
+              key: 'logout',
+            },
+          ]
         }
       ];
 
