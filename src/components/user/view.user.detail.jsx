@@ -4,7 +4,6 @@ import { handleUploadFile, updateUserAvatarAPI } from "../../services/api.servic
 
 
 const ViewUserDetail = (props) => {
-    console.log(props);
     const {isUserTableOpen, setIsUserTableOpen, dataUserTableOpen, loadUser} = props;
     const onClose = () => {
         setIsUserTableOpen(false);
