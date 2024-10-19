@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../components/context/auth.context";
-import { Navigate } from "react-router-dom";
-import { Result } from "antd";
+import { Link, Navigate } from "react-router-dom";
+import { Button, Result } from "antd";
 
 const PrivateRoute = (props) => {
     const { user } = useContext(AuthContext)
