@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Table, Tag } from 'antd';
+import { Button, Space, Table, Tag } from 'antd';
 import { getBookAPI } from '../../services/api.service';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import BookDetail from './book.detal';
+import CreateBookControl from './create.book.control';
+import BookForm from './bookForm';
 
 const BookTable = () => {
 
@@ -14,7 +16,8 @@ const BookTable = () => {
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
     const [dataDetail, setDataDeTail] = useState(null);
 
-
+    const [isCreateOpen, setIsCreateOpen] = useState(false);
+    
     const loadBook = async () => {
         const res = await getBookAPI(current, pageSize);
         if(res && res.data && res.data.result){
@@ -116,26 +119,40 @@ const BookTable = () => {
         
     
     return(
-        <>
+        <>  
+            <div className="user-form" style={{ margin: "10px 0", padding:"0px 20px"}}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <h3>Book page</h3>
+                    <Button
+                        type="primary"
+                        onClick={() => {setIsCreateOpen(true)}}
+                    > Create User </Button>
+                </div>
+            </div>
             <Table 
-            style={{marginBottom: "30px", padding:"0px 20px"}}
-            columns={columns} 
-            dataSource={dataBook} 
-            pagination=
-            {{ 
-                current: current,
-                pageSize: pageSize,
-                total: pageTotal,
-                showSizeChanger: true, 
-                pageSizeOptions: ['2', '5', '10']
-            }}
-            onChange={handleTableOnChange}
+                style={{marginBottom: "30px", padding:"0px 20px"}}
+                columns={columns} 
+                dataSource={dataBook} 
+                pagination=
+                {{ 
+                    current: current,
+                    pageSize: pageSize,
+                    total: pageTotal,
+                    showSizeChanger: true, 
+                    pageSizeOptions: ['2', '5', '10']
+                }}
+                onChange={handleTableOnChange}
             />
             <BookDetail
                 isOpenDrawer={isOpenDrawer}
                 setIsOpenDrawer={setIsOpenDrawer}
                 dataDetail={dataDetail}
                 setDataDeTail={setDataDeTail}
+            />
+            <CreateBookControl
+                isCreateOpen={isCreateOpen}
+                setIsCreateOpen={setIsCreateOpen}
+                loadBook={loadBook}
             />
         </>
     )
