@@ -3,7 +3,7 @@ import { Button } from "antd"
 const BookForm = () => {
     return ( 
     <>
-        <div className="user-form" style={{ margin: "10px 0" }}>
+        <div className="user-form" style={{ margin: "10px 0", padding:"0px 20px"}}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <h3>Book page</h3>
                 <Button
