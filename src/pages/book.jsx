@@ -1,6 +1,12 @@
+import BookForm from "../components/book/bookForm";
+import BookTable from "../components/book/bookTable";
+
 const BookPage = () => {
     return (
-        <div>Book page</div>
+        <>
+            <BookForm/>
+            <BookTable/>
+        </>
     )
 }
 
