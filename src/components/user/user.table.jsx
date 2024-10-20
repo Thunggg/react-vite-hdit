@@ -100,7 +100,6 @@ const UserTable = (props) => {
     ];
     
     const onChange = (pagination, filters, sorter, extra) => {
-        console.log(pagination);
         // nếu thay đổi trang
         if(pagination && pagination.current){
             if(+pagination.current !== +current){

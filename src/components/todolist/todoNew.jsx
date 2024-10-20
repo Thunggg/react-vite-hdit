@@ -4,7 +4,6 @@ const TodoNew = (props) => {
   const [valueInput, setValueInput] = useState("");
   const { addNewTodo } = props;
 
-  // console.log(props)
 
   const handleSubmit = (event) => {
     event.preventDefault(); 
