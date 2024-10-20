@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Tag } from 'antd';
-import { getBookAPI } from '../../services/api.service';
+import { Button, message, notification, Popconfirm, Space, Table, Tag } from 'antd';
+import { deleteBookAPI, getBookAPI } from '../../services/api.service';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import BookDetail from './book.detal';
 import CreateBookControl from './create.book.control';
@@ -118,16 +118,43 @@ const BookTable = () => {
                         setIsModalUpdateOpen(true)
                     }}
                     />
-                    <DeleteOutlined
-                    style={{ cursor: "pointer", color: "red" }}
-                    />
+                    <Popconfirm
+                        title="Delete the task"
+                        description="Are you sure to delete this task?"
+                        onConfirm={() => handelDelete(record)}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <DeleteOutlined
+                            style={{ cursor: "pointer", color: "red" }}
+                        />
+                    </Popconfirm>
+                    
                 </div>
             ),
         },
 
     ];
         
-    
+    const handelDelete = async (record) => {
+        if(record){
+            const id = record._id;
+            const res = await deleteBookAPI(id);
+            if(res.data){
+                notification.success({
+                    message: "Delete book",
+                    description: "Xóa book thành công"
+                })
+                await loadBook();    
+            } else {
+                notification.error({
+                    message: "Error delete book",
+                    description: JSON.stringify(res.message)
+                })
+            }    
+        }
+    }
+
     return(
         <>  
             <div className="user-form" style={{ margin: "10px 0", padding:"0px 20px"}}>
