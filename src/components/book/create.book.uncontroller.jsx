@@ -11,6 +11,8 @@ const CreateBookUncontrol = (props) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
 
+    const [loadingTable , setLoadingTable] = useState(false);
+
     const { isCreateOpen, setIsCreateOpen, loadBook } = props;
 
     const resetAndCloseModal = () => {
@@ -32,9 +34,13 @@ const CreateBookUncontrol = (props) => {
                 message: "Error create book",
                 description: "Vui lòng upload ảnh thumbnail"
             })
+            return; // Dừng việc tiếp tục nếu chưa có file
         } 
 
+        setLoadingTable(true);
         const resUpload = await handleUploadFile(selectedFile, "book"); // upload vao database local tren may
+        setLoadingTable(false);
+
         if(resUpload.data){
             //upload anh thanh cong
             const {mainText, author, price, quantity, category} = value;
@@ -72,6 +78,9 @@ const CreateBookUncontrol = (props) => {
                 open={isCreateOpen} 
                 onOk={() => {form.submit()}} 
                 onCancel={() => resetAndCloseModal()}
+                okButtonProps={{
+                    loading: loadingTable
+                }}
             >
                 <Form
                     form={form}

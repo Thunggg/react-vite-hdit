@@ -25,7 +25,10 @@ const BookTable = () => {
 
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     
+    const [loadingTable, setLoadingTable] = useState(false); 
+
     const loadBook = async () => {
+        setLoadingTable(true);
         const res = await getBookAPI(current, pageSize);
         if(res && res.data && res.data.result){
             setDataBook(res.data.result);
@@ -33,6 +36,7 @@ const BookTable = () => {
             setPageSize(res.data.meta.pageSize);
             setPageTotal(res.data.meta.total);
         }
+        setLoadingTable(false);
     }
 
     useEffect(() => {
@@ -179,6 +183,7 @@ const BookTable = () => {
                     pageSizeOptions: ['2', '5', '10']
                 }}
                 onChange={handleTableOnChange}
+                loading={loadingTable}
             />
             <BookDetail
                 isOpenDrawer={isOpenDrawer}
